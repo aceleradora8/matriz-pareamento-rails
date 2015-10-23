@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Duplas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Aluno1</th>
+      <th>Aluno2</th>
+      <th>Num pareamento</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @duplas.each do |dupla| %>
+      <tr>
+        <td><%= dupla.aluno1_id %></td>
+        <td><%= dupla.aluno2_id %></td>
+        <td><%= dupla.num_pareamento %></td>
+        <td><%= link_to 'Show', dupla %></td>
+        <td><%= link_to 'Edit', edit_dupla_path(dupla) %></td>
+        <td><%= link_to 'Destroy', dupla, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Dupla', new_dupla_path %>

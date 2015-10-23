@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Aluno1:</strong>
+  <%= @dupla.aluno1_id %>
+</p>
+
+<p>
+  <strong>Aluno2:</strong>
+  <%= @dupla.aluno2_id %>
+</p>
+
+<p>
+  <strong>Num pareamento:</strong>
+  <%= @dupla.num_pareamento %>
+</p>
+
+<%= link_to 'Edit', edit_dupla_path(@dupla) %> |
+<%= link_to 'Back', duplas_path %>

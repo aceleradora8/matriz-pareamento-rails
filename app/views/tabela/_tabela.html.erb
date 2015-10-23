@@ -1,0 +1,25 @@
+<table>
+<tr>
+	<td>xxx</td>
+	<% @alunos.each do |aluno| %>  
+    <td>
+    <%= aluno.nome %>
+    </td>
+   <% end %>
+</tr>
+<% @alunos.each do |aluno| %> 
+<tr> 
+	<td>
+		<%= aluno.nome %>
+	</td>
+	<% @alunos.each do |aluno| %>  
+    <td>
+    "xxx"
+    </td>
+    <% end %>
+</tr>
+<% end %>
+</table>
+
+
+

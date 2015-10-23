@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  aluno1_id: 1
+  aluno2_id: 1
+  num_pareamento: 1
+
+two:
+  aluno1_id: 1
+  aluno2_id: 1
+  num_pareamento: 1
