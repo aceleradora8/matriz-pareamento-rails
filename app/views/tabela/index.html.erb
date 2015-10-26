@@ -12,17 +12,13 @@
 <h3>Pares Sorteados:</h3>
  <% @duplas.each do |dupla| %>
    <%= "Dupla: #{Aluno.find(dupla[0].aluno1_id).nome}  +  #{Aluno.find(dupla[0].aluno2_id).nome}" %>
+   <input type="hidden" class="id-duplas" value="<%= dupla[0].id %>"/>
    <br/>
- <% end %> 
+ <% end %>
 
-<input type="button" class="btn btn-default" value="Sortear Novamente" id="botao" onclick="manter_historia()"/>
-<%= link_to "Confirmar Duplas", confirmar_path, :class => 'btn btn-default' %>
+<input type="button" class="btn btn-default" value="Sortear Novamente" id="botao-manter" onclick="manter_historia()"/>
+<input type="button" class="btn btn-default" value="Confirmar Dupla" id="botao-confirmar" onclick="confirmar_dupla()"/>
 </div>
 <div class="col-lg-4">
 </div>
 </div>
-
-
-
-
-

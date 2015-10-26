@@ -4,7 +4,7 @@
     <td>Manter na História</td>
     <% @alunos.each do |aluno| %>
     <td>
-    <input type="checkbox" name="manter_historia" class = "cbmanter" value="<%= aluno.id %>" 
+    <input type="checkbox" name="manter_historia" class = "cbmanter" value="<%= aluno.id %>"
     <%= @selecionado.include?(aluno.id) ? "checked" : "" %> />
     </td>
    <% end %>
@@ -31,11 +31,18 @@
     <% else %>
     <td class='active' value="<%=aluno1.id.to_s << ',' << aluno2.id.to_s%>">
 
+
             <% @todas_duplas.each do |dupla| %>
             <% if (dupla.aluno1_id.to_s << ',' << dupla.aluno2_id.to_s).eql?(aluno1.id.to_s << ',' << aluno2.id.to_s) %>
                 <%= dupla.num_pareamento %>
             <% end %>
         <% end %>
+
+        <% @duplas.each do |dupla| %>
+        <% if (dupla[0].aluno1_id.to_s << ',' << dupla[0].aluno2_id.to_s).eql?(aluno1.id.to_s << ',' << aluno2.id.to_s) %>
+            <%= '+1' %>
+        <% end %>
+    <% end %>
 
     </td>
     <% end %>

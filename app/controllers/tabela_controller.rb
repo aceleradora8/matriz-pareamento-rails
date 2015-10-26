@@ -48,7 +48,25 @@ class TabelaController < ApplicationController
     end
 
     def confirmar_dupla
+      @alunos = Aluno.all
+      @todas_duplas = Dupla.all
+      @duplas = []
+      @selecionado = []
+      alunos_manter_historia = []
+      duplas = []
+      unless params[:duplas] == nil
+        parametros =  params[:duplas].split(",").map {|i| i.to_i}
+        parametros.each do |id|
+          duplas.push(Dupla.find(id));
+        end
 
-
+        duplas.each do |dupla|
+          dupla.num_pareamento+=1
+          dupla.save
+        end
+        redirect_to :controller => 'tabela', :action => 'index'
+      end
     end
+
+
 end

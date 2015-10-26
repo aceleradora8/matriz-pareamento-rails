@@ -2,6 +2,7 @@ var val = [];
 var checkboxMarcados = [];
 
 
+
 function manter_historia() {
     var checkbox = $('.cbmanter:checked');
     if(checkbox.length > 0) {
@@ -14,9 +15,24 @@ function manter_historia() {
         window.location.replace(link);
 
 
+
 }
 
+function confirmar_dupla() {
+params = [];
+    var duplas = $('.id-duplas');
+        duplas.each(function(){
+            params.push($(this).val());
+        });
 
+        var link = "/confirmar/" + params;
+        window.location.replace(link);
+
+}
+
+/* Tentativa de bloqueio de uma pessoa da dupla, para manter na historia e realizar o sorteio
+*/
+/*
 function associaEventoCheckbox(){
   var checkbox = $('.cbmanter');
     checkbox.on("click",function() {
@@ -36,3 +52,4 @@ function associaEventoCheckbox(){
 $(document).ready(function() {
   associaEventoCheckbox();
 });
+*/
