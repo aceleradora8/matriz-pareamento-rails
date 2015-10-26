@@ -1,45 +1,29 @@
-<%= form_for @dupla, :html => { :class => "form-horizontal dupla" } do |f| %>
+<%= form_for(@dupla) do |f| %>
+  <% if @dupla.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dupla.errors.count, "error") %> prohibited this dupla from being saved:</h2>
 
-    <% if @dupla.errors.any? %>
-    <div id="error_expl" class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@dupla.errors.count, "error") %> prohibited this dupla from being saved:</h3>
-      </div>
-      <div class="panel-body">
-        <ul>
-        <% @dupla.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
+      <ul>
+      <% @dupla.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
     </div>
   <% end %>
 
-  <div class="control-group">
-    <%= f.label :aluno1_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :aluno1_id, :class => 'form-control' %>
-    </div>
-    <%= error_span(@dupla[:aluno1_id]) %>
+  <div class="field">
+    <%= f.label :aluno1_id %><br>
+    <%= f.text_field :aluno1_id %>
   </div>
-  <div class="control-group">
-    <%= f.label :aluno2_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :aluno2_id, :class => 'form-control' %>
-    </div>
-    <%= error_span(@dupla[:aluno2_id]) %>
+  <div class="field">
+    <%= f.label :aluno2_id %><br>
+    <%= f.text_field :aluno2_id %>
   </div>
-  <div class="control-group">
-    <%= f.label :num_pareamento, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :num_pareamento, :class => 'form-control' %>
-    </div>
-    <%= error_span(@dupla[:num_pareamento]) %>
+  <div class="field">
+    <%= f.label :num_pareamento %><br>
+    <%= f.number_field :num_pareamento %>
   </div>
-
-
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            duplas_path, :class => 'btn btn-default' %>
-
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 <% end %>

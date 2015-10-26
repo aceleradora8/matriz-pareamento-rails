@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151023131004) do
+ActiveRecord::Schema.define(version: 20151026131154) do
 
   create_table "alunos", force: :cascade do |t|
     t.string   "nome"
@@ -25,6 +25,16 @@ ActiveRecord::Schema.define(version: 20151023131004) do
     t.integer  "num_pareamento"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+  end
+
+  add_index "duplas", ["aluno1_id"], name: "index_duplas_on_aluno1_id"
+  add_index "duplas", ["aluno2_id"], name: "index_duplas_on_aluno2_id"
+
+  create_table "turmas", force: :cascade do |t|
+    t.integer  "aluno1_id"
+    t.integer  "aluno2_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

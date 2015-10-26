@@ -5,7 +5,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:id)%></th>
       <th><%= model_class.human_attribute_name(:aluno1_id) %></th>
       <th><%= model_class.human_attribute_name(:aluno2_id) %></th>
       <th><%= model_class.human_attribute_name(:num_pareamento) %></th>
@@ -17,8 +17,8 @@
     <% @duplas.each do |dupla| %>
       <tr>
         <td><%= link_to dupla.id, dupla_path(dupla) %></td>
-        <td><%= dupla.aluno1_id %></td>
-        <td><%= dupla.aluno2_id %></td>
+        <td><%= dupla.aluno1.nome %></td>
+        <td><%= dupla.aluno2.nome %></td>
         <td><%= dupla.num_pareamento %></td>
         <td><%=l dupla.created_at %></td>
         <td>

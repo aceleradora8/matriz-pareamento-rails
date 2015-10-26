@@ -15,7 +15,6 @@ class DuplasController < ApplicationController
   # GET /duplas/new
   def new
     @dupla = Dupla.new
-    @alunos = Aluno.all
   end
 
   # GET /duplas/1/edit
