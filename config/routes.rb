@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   resources :duplas
   resources :alunos
-  resources :tabela
+  root 'tabela#index'
+  get '/tabela' => 'tabela#index'
+  get '/tabela/:manter' => 'tabela#index'
+  get '/confirmar' => 'tabela#confirmar_dupla'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

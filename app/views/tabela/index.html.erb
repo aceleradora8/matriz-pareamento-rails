@@ -1,9 +1,28 @@
-
-<p id="notice"><%= notice %></p>
+<%= javascript_include_tag "tabela" %>
 
 <h1>Matriz de Pareamento</h1>
 
+<%= @params %>
+
 <%= render 'tabela' %>
+<div class="container">
+<div class="col-lg-4">
+</div>
+<div class="col-lg-4">
+<h3>Pares Sorteados:</h3>
+ <% @duplas.each do |dupla| %>
+   <%= "Dupla: #{Aluno.find(dupla[0].aluno1_id).nome}  +  #{Aluno.find(dupla[0].aluno2_id).nome}" %>
+   <br/>
+ <% end %> 
+
+<input type="button" class="btn btn-default" value="Sortear Novamente" id="botao" onclick="manter_historia()"/>
+<%= link_to "Confirmar Duplas", confirmar_path, :class => 'btn btn-default' %>
+</div>
+<div class="col-lg-4">
+</div>
+</div>
+
+
 
 
 

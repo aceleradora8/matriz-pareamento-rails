@@ -1,21 +1,45 @@
-<table>
+
+<table class="table table-bordered">
 <tr>
-	<td>xxx</td>
+    <td>Manter na História</td>
+    <% @alunos.each do |aluno| %>  
+    <td>
+    <input type="checkbox" name="manter_historia" value="<%= aluno.id %>" 
+    <%= @selecionado.include?(aluno.id) ? "checked" : "" %> /> 
+    </td>
+   <% end %>
+</tr>
+<tr>
+	<td></td>
 	<% @alunos.each do |aluno| %>  
     <td>
     <%= aluno.nome %>
     </td>
    <% end %>
 </tr>
-<% @alunos.each do |aluno| %> 
+<% @alunos.each do |aluno1| %> 
 <tr> 
 	<td>
-		<%= aluno.nome %>
+		<%= aluno1.nome %>
 	</td>
-	<% @alunos.each do |aluno| %>  
-    <td>
-    "xxx"
+	<% @alunos.each do |aluno2| %>  
+    
+    <% if aluno1.id <= aluno2.id %>
+    <td class='danger'>
+
     </td>
+    <% else %>
+    <td class='active' value="<%=aluno1.id.to_s << ',' << aluno2.id.to_s%>">
+
+            <% @todas_duplas.each do |dupla| %>
+            <% if (dupla.aluno1_id.to_s << ',' << dupla.aluno2_id.to_s).eql?(aluno1.id.to_s << ',' << aluno2.id.to_s) %>
+                <%= dupla.num_pareamento %>
+            <% end %> 
+        <% end %>
+
+    </td>
+    <% end %>
+    
     <% end %>
 </tr>
 <% end %>

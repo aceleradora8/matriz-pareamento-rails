@@ -1,31 +1,40 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Duplas</h1>
-
-<table>
+<%- model_class = Dupla -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Aluno1</th>
-      <th>Aluno2</th>
-      <th>Num pareamento</th>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:aluno1_id) %></th>
+      <th><%= model_class.human_attribute_name(:aluno2_id) %></th>
+      <th><%= model_class.human_attribute_name(:num_pareamento) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @duplas.each do |dupla| %>
       <tr>
+        <td><%= link_to dupla.id, dupla_path(dupla) %></td>
         <td><%= dupla.aluno1_id %></td>
         <td><%= dupla.aluno2_id %></td>
         <td><%= dupla.num_pareamento %></td>
-        <td><%= link_to 'Show', dupla %></td>
-        <td><%= link_to 'Edit', edit_dupla_path(dupla) %></td>
-        <td><%= link_to 'Destroy', dupla, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l dupla.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_dupla_path(dupla), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      dupla_path(dupla),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Dupla', new_dupla_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_dupla_path,
+            :class => 'btn btn-primary' %>
