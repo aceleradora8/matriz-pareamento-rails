@@ -212,11 +212,13 @@ pt-BR:
       aluno: Alunos
     attributes:
       dupla:
+        updated_at: "Atualizado em"
         created_at: "Criado em"
         num_pareamento: "Número de Pareamentos"
         aluno1_id: "Aluno 1"
         aluno2_id: "Aluno 2"
         id: "ID"
       aluno:
+        updated_at: "Atualizado em"
         created_at: "Criado em"
         id: "ID"
