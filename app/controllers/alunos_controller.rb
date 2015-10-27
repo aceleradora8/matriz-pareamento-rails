@@ -33,7 +33,11 @@ class AlunosController < ApplicationController
           dupla.aluno1_id = Aluno.all[Aluno.all.length-1].id
           dupla.aluno2_id = aluno_banco.id
           dupla.num_pareamento = 0
+          dupla.created_at = Time.zone.today
+          dupla.updated_at = DateTime.civil_from_format :local, 2015
+          Dupla.record_timestamps=false
           dupla.save unless dupla.aluno1_id == dupla.aluno2_id
+          Dupla.record_timestamps=true
         end
         format.html { redirect_to @aluno, notice: 'Aluno was successfully created.' }
         format.json { render :show, status: :created, location: @aluno }
@@ -61,7 +65,13 @@ class AlunosController < ApplicationController
   # DELETE /alunos/1
   # DELETE /alunos/1.json
   def destroy
+    Dupla.all.each do |dupla|
+      if(dupla.aluno1_id == @aluno.id || dupla.aluno2_id == @aluno.id )
+        dupla.destroy
+      end
+    end
     @aluno.destroy
+
     respond_to do |format|
       format.html { redirect_to alunos_url, notice: 'Aluno was successfully destroyed.' }
       format.json { head :no_content }
