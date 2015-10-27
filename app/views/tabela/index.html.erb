@@ -1,23 +1,39 @@
 <%= javascript_include_tag "tabela" %>
-
+<div class="container">
 <h1>Matriz de Pareamento</h1>
 
-<%= @params %>
-
 <%= render 'tabela' %>
-<div class="container">
+
+
 <div class="col-lg-4">
+<table class="table table-bordered">
+	<tr>
+		<td colspan="2"><h3>Ultimos Pares:</h3></td>
+		<td><h3>Manter:</h3></td>
+	</tr>
+ <% @ultimas_duplas.each do |dupla| %>
+ 	<tr value="<%= dupla.id %>">
+ 		<td class="td-dupla-<%= dupla.id %>" value="<%= dupla.aluno1.id %>"><%=dupla.aluno1.nome%></td>
+ 		<td class="td-dupla-<%= dupla.id %>" value="<%= dupla.aluno2.id %>"><%=dupla.aluno2.nome%></td>
+ 		<td>
+ 			<input type="checkbox" name="manter-dupla" class = "cbdupla" value="<%= dupla.id %>">
+ 		</td>
+	</tr>
+ <% end %>
+</table>
 </div>
 <div class="col-lg-4">
-<h3>Pares Sorteados:</h3>
+<table class="table table-bordered">
+	<tr><td colspan="2"><h3>Pares Sorteados:</h3></td></tr>
  <% @duplas.each do |dupla| %>
-   <%= "Dupla: #{Aluno.find(dupla[0].aluno1_id).nome}  +  #{Aluno.find(dupla[0].aluno2_id).nome}" %>
-   <input type="hidden" class="id-duplas" value="<%= dupla[0].id %>"/>
-   <br/>
+ 	<tr class="id-duplas" value="<%= dupla.id %>">
+ 		<td value="<%= dupla.aluno1.id %>"><%=dupla.aluno1.nome%></td>
+ 		<td value="<%= dupla.aluno2.id %>"><%=dupla.aluno2.nome%></td>
+	</tr>
  <% end %>
-
-<input type="button" class="btn btn-default" value="Sortear Novamente" id="botao-manter" onclick="manter_historia()"/>
-<input type="button" class="btn btn-default" value="Confirmar Dupla" id="botao-confirmar" onclick="confirmar_dupla()"/>
+</table>
+<input type="button" class="btn btn-default" value="Sortear Novamente" id="botao-sortear"/>
+<input type="button" class="btn btn-default" value="Confirmar Dupla" id="botao-confirmar"/>
 </div>
 <div class="col-lg-4">
 </div>

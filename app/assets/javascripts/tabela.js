@@ -3,7 +3,7 @@ var checkboxMarcados = [];
 
 
 
-function manter_historia() {
+function mandaSortearComParametros() {
     var checkbox = $('.cbmanter:checked');
     if(checkbox.length > 0) {
         checkbox.each(function(){
@@ -18,11 +18,11 @@ function manter_historia() {
 
 }
 
-function confirmar_dupla() {
+function confirmarDupla() {
 params = [];
     var duplas = $('.id-duplas');
         duplas.each(function(){
-            params.push($(this).val());
+            params.push(this.getAttribute("value"));
         });
 
         var link = "/confirmar/" + params;
@@ -30,8 +30,8 @@ params = [];
 
 }
 
-$(document).ready(function () {
-   $(".cbmanter").change(function () {
+function limitarOpcoesManterAluno(){
+  $(".cbmanter").change(function () {
       var maxPermitido = $(".cbmanter").length/2;
       var cnt = $(".cbmanter:checked").length;
       if (cnt > maxPermitido) 
@@ -39,27 +39,31 @@ $(document).ready(function () {
          $(this).prop("checked", "");
      }
   });
-});
-/* Tentativa de bloqueio de uma pessoa da dupla, para manter na historia e realizar o sorteio
-*/
-/*
-function associaEventoCheckbox(){
-  var checkbox = $('.cbmanter');
-    checkbox.on("click",function() {
-      if($(this).is(":checked")){
-        checkboxMarcados.push($(this));
+}
 
-        if (checkboxMarcados.length > (checkbox.length/2)){
-          console.log(checkboxMarcados)
-        checkboxMarcados[0].prop('checked', false);
-        checkboxMarcados.splice(checkboxMarcados.indexOf(checkboxMarcados[0]),1);
-      }
-        console.log($(this))
-    }
+function ManterDupla(){
+  $(".cbdupla").change(function () {
+    var ids_duplas = [];
+     $(".cbdupla:checked").each(function(){
+      ids_duplas.push(this.getAttribute("value"));
+    });
+    
+         console.log(ids_duplas);
+
   });
-};
+}
 
-$(document).ready(function() {
-  associaEventoCheckbox();
+function associaEventoBotaoConfirmar(){
+  $("#botao-confirmar").on("click",confirmarDupla);
+}
+
+function associaEventoBotaoSortear(){
+  $("#botao-sortear").on("click",mandaSortearComParametros);
+}
+
+$(document).ready(function () {
+  limitarOpcoesManterAluno();
+  associaEventoBotaoConfirmar();
+  associaEventoBotaoSortear();
+  ManterDupla();
 });
-*/
