@@ -30,6 +30,16 @@ params = [];
 
 }
 
+$(document).ready(function () {
+   $(".cbmanter").change(function () {
+      var maxPermitido = $(".cbmanter").length/2;
+      var cnt = $(".cbmanter:checked").length;
+      if (cnt > maxPermitido) 
+      {
+         $(this).prop("checked", "");
+     }
+  });
+});
 /* Tentativa de bloqueio de uma pessoa da dupla, para manter na historia e realizar o sorteio
 */
 /*
