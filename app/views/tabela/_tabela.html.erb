@@ -36,7 +36,7 @@
 
     <% @duplas.each do |dupla| %>
       <% if (dupla.aluno1_id.to_s << ',' << dupla.aluno2_id.to_s).eql?(aluno1.id.to_s << ',' << aluno2.id.to_s) %>
-        <%= '+1' %>
+        <span class='dupla'> </span>
       <% end %>
     <% end %>
 

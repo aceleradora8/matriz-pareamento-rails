@@ -66,4 +66,8 @@ $(document).ready(function () {
   associaEventoBotaoConfirmar();
   associaEventoBotaoSortear();
   ManterDupla();
+
+  $(".dupla").each(function(){
+      $(this).parent().addClass('success');
+    });
 });

@@ -11,7 +11,6 @@
       <th><%= model_class.human_attribute_name(:num_pareamento) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%= model_class.human_attribute_name(:updated_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
@@ -24,12 +23,6 @@
         <td><%=l dupla.created_at %></td>
         <td><%=l dupla.updated_at %></td>
         <td>
-        
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      dupla_path(dupla),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
         </td>
       </tr>
     <% end %>
