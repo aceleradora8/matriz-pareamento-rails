@@ -3,46 +3,56 @@ class TabelaController < ApplicationController
    before_action :set_alunos, :set_todas_duplas, :set_ultimas_duplas
 
 def index
-  @duplas = []
-  @selecionados = []
-  alunos_manter_historia = []
-  lista_alunos = []
-
-  unless params[:manter] == nil
-    @selecionados =  params[:manter].split(",").map {|i| i.to_i}
-    @selecionados.each { |id| alunos_manter_historia.push(Aluno.find(id)) }
-  end
-
-  alunos_embaralhados = @alunos.shuffle
-  alunos_manter_historia.each { |aluno| alunos_embaralhados.delete(aluno)}
-
-  if(@alunos.empty?)
-    redirect_to :controller => 'alunos', :action => 'index'
-  elsif(@alunos.length < 2)
+  if(@alunos.empty? || @alunos.length < 2)
+    flash[:notice] = "Para gerar a matriz, crie pelo menos 2 alunos!"
     redirect_to :controller => 'alunos', :action => 'index'
   else
-    lista_alunos =  alunos_embaralhados.in_groups_of(@alunos.size/2)
-    lista1 = lista_alunos.first
-    lista2 = lista_alunos.second
-
-    alunos_manter_historia.each do |aluno_manter|
-      lista2 = [] if lista2==nil
-      lista2.push(aluno_manter)
-    end
-
-    lista2 = lista2.compact
-
-    for i in 0..(lista1.length-1)
-      if lista1[i].id < lista2[i].id
-        aux = lista1[i]
-        lista1[i] = lista2[i]
-        lista2[i] = aux
-      end
-      dupla_banco = Dupla.where({ aluno1_id: lista1[i].id, aluno2_id: lista2[i].id })
-      @duplas.push(dupla_banco.to_a[0])
-    end
+    @duplas = []
+    @selecionados = []
+    definir_duplas
   end
 end
+
+  def definir_duplas
+    alunos_manter_historia = []
+    unless params[:manter] == nil
+      @selecionados =  params[:manter].split(",").map {|i| i.to_i}
+      @selecionados.each { |id| alunos_manter_historia.push(Aluno.find(id)) }
+    end
+    @todas_duplas_ordenada = @todas_duplas.shuffle
+    @todas_duplas_ordenada = @todas_duplas_ordenada.sort { |x,y| x.num_pareamento <=> y.num_pareamento }
+    num_duplas = @alunos.length/2
+    i = 0
+    while(num_duplas>0) do
+      unless(dupla_contem_alunos_juntos_do_manter_historia?(@todas_duplas_ordenada[i], alunos_manter_historia))
+        unless(lista_contem_alunos_dessa_dupla?(@duplas,@todas_duplas_ordenada[i]))
+          @duplas.push(@todas_duplas_ordenada[i])
+          num_duplas-=1
+        end
+      end
+      i+=1
+    end
+  end
+
+  def lista_contem_alunos_dessa_dupla?(lista,dupla)
+    lista.each do |dupla_lista|
+      if( dupla_lista.aluno1.id == dupla.aluno1.id ||
+          dupla_lista.aluno1.id == dupla.aluno2.id ||
+          dupla_lista.aluno2.id == dupla.aluno1.id ||
+          dupla_lista.aluno2.id == dupla.aluno2.id)
+          return true
+       end
+    end
+     false
+  end
+
+  def dupla_contem_alunos_juntos_do_manter_historia?(dupla,alunos_manter_historia)
+    if(alunos_manter_historia.include?(dupla.aluno1) &&
+      alunos_manter_historia.include?(dupla.aluno2))
+      return true
+    end
+    false
+  end
 
   def confirmar_dupla
     duplas = []
@@ -70,8 +80,6 @@ end
 
   def set_ultimas_duplas
     @ultimas_duplas = Dupla.all.order("updated_at desc").limit(Aluno.all.length/2).to_a
-
-
   end
 
 end
