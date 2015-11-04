@@ -19,8 +19,7 @@ end
       @selecionados =  params[:manter].split(",").map {|i| i.to_i}
       @selecionados.each { |id| alunos_manter_historia.push(Aluno.find(id)) }
     end
-    @todas_duplas_ordenada = @todas_duplas.shuffle
-    @todas_duplas_ordenada = @todas_duplas_ordenada.sort { |x,y| x.num_pareamento <=> y.num_pareamento }
+    @todas_duplas_ordenada = @todas_duplas.sort { |x,y| x.num_pareamento <=> y.num_pareamento }
     num_duplas = @alunos.length/2
     i = 0
     while(num_duplas>0) do
@@ -46,9 +45,8 @@ end
      false
   end
 
-  def dupla_contem_alunos_juntos_do_manter_historia?(dupla,alunos_manter_historia)
-    if(alunos_manter_historia.include?(dupla.aluno1) &&
-      alunos_manter_historia.include?(dupla.aluno2))
+   def dupla_contem_alunos_juntos_do_manter_historia?(dupla,alunos_manter_historia)
+    if(alunos_manter_historia.include?(dupla.aluno1) && alunos_manter_historia.include?(dupla.aluno2))
       return true
     end
     false

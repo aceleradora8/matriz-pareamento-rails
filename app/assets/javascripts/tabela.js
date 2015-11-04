@@ -68,6 +68,6 @@ $(document).ready(function () {
   ManterDupla();
 
   $(".dupla").each(function(){
-      $(this).parent().addClass('success');
+      $(this).parent().addClass('label-success').removeClass('active');
     });
 });

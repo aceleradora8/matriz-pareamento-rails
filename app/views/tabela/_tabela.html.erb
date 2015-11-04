@@ -24,7 +24,7 @@
     </td>
     <% @alunos.each do |aluno2| %>
     <% if aluno1.id <= aluno2.id %>
-    <td class='danger'></td>
+    <td class='label-danger'></td>
     <% else %>
     <td class='active' value="<%=aluno1.id.to_s << ',' << aluno2.id.to_s%>">
 
