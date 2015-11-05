@@ -1,29 +1,17 @@
 <div class="container">
 <h1>Matriz de Pareamento</h1>
 
-
-<% @todas_duplas_ordenada.each do |dupla| %>
- 	<%= "#{dupla.aluno1.nome} + #{dupla.aluno2.nome} ---- #{dupla.num_pareamento} " %>
- 	<br/>
- <% end %>
-
-<%= @erroAqui %>
-
 <%= render 'tabela' %>
 
 <div class="col-lg-4">
 <table class="table table-bordered">
 	<tr>
 		<td colspan="2"><h3>Ultimos Pares:</h3></td>
-		<td><h3>Manter:</h3></td>
 	</tr>
  <% @ultimas_duplas.each do |dupla| %>
  	<tr value="<%= dupla.id %>">
  		<td class="td-dupla-<%= dupla.id %>" value="<%= dupla.aluno1.id %>"><%=dupla.aluno1.nome%></td>
  		<td class="td-dupla-<%= dupla.id %>" value="<%= dupla.aluno2.id %>"><%=dupla.aluno2.nome%></td>
- 		<td>
- 			<input type="checkbox" name="manter-dupla" class = "cbdupla" value="<%= dupla.id %>">
- 		</td>
 	</tr>
  <% end %>
 </table>
