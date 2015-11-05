@@ -3,5 +3,5 @@ rvm:
   - 2.2.3
 
 script:
-  - bundle exec rake build
-  - bundle exec rake builddoc
+
+    - bundle exec rake test:integration
