@@ -3,13 +3,6 @@ require 'test_helper'
 class DuplasControllerTest < ActionController::TestCase
   setup do
     @dupla = duplas(:one)
-	
-  end
-
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:duplas)
   end
 
   test "should get new" do
@@ -25,10 +18,6 @@ class DuplasControllerTest < ActionController::TestCase
     assert_redirected_to dupla_path(assigns(:dupla))
   end
 
-  test "should show dupla" do
-    get :show, id: @dupla
-    assert_response :success
-  end
 
   test "should get edit" do
     get :edit, id: @dupla
