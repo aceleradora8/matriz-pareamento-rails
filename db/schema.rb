@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151026131154) do
+ActiveRecord::Schema.define(version: 20151106174441) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "alunos", force: :cascade do |t|
     t.string   "nome"
@@ -20,14 +23,11 @@ ActiveRecord::Schema.define(version: 20151026131154) do
   end
 
   create_table "duplas", force: :cascade do |t|
+    t.integer  "num_pareamento"
     t.integer  "aluno1_id"
     t.integer  "aluno2_id"
-    t.integer  "num_pareamento"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
-
-  add_index "duplas", ["aluno1_id"], name: "index_duplas_on_aluno1_id"
-  add_index "duplas", ["aluno2_id"], name: "index_duplas_on_aluno2_id"
 
 end
